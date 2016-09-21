@@ -1,5 +1,5 @@
 import unittest
-import commands
+from command_by_name import commands_dictionary
 
 
 # function searches variables in shell's environment and puts them in the input there it's necessary
@@ -60,8 +60,8 @@ def get_tokens(input_stream, environment):
             else:
                 token = input_stream[i: input_stream.find(" ", i + 1)]
                 i = input_stream.find(" ", i + 1) + 1
-            if token in commands.command_by_name:
-                token = commands.command_by_name[token]
+            if token in commands_dictionary:
+                token = commands_dictionary[token]
         tokens.append(token)
 
     return tokens
@@ -80,10 +80,10 @@ class TestLexer(unittest.TestCase):
     def test_lexer_simple_input(self):
         self.environment = {}
         self.input_stream = "exit 'now'"
-        self.assertEqual(get_tokens(self.input_stream, self.environment), [commands.command_by_name['exit'], "now"])
+        self.assertEqual(get_tokens(self.input_stream, self.environment), [commands_dictionary['exit'], "now"])
 
     def test_lexer_pipe(self):
         self.environment = {}
         self.input_stream = "exit | 'now'"
         self.assertEqual(get_tokens(self.input_stream, self.environment),
-                         [commands.command_by_name['exit'], commands.command_by_name['|'], "now"])
+                         [commands_dictionary['exit'], commands_dictionary['|'], "now"])
