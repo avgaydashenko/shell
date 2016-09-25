@@ -1,4 +1,5 @@
 # will be used in command_grep
+import os
 import re
 import argparse
 
@@ -108,6 +109,24 @@ def command_grep(shell_status, args):
     shell_status.input_stream = ""
 
 
+# current input and output are ignored
+# command change current directory
+# any potential arguments are ignored
+def command_cd(shell_status, args):
+    shell_status.input_stream = ""
+    shell_status.output_stream = ""
+
+    os.chdir(str(args[0]))
+
+
+# current input and output are ignored
+# command writes to the new output list of file in current directory
+# any potential arguments are ignored
+def command_ls(shell_status, _):
+    shell_status.input_stream = ""
+    shell_status.output_stream = ' '.join(os.listdir(str(getcwd())))
+
+
 # this dictionary is used in lexer to define commands in input
 command_by_name = {
     "exit":   command_exit,
@@ -117,5 +136,7 @@ command_by_name = {
     "cat":    command_cat,
     "wc":     command_wc,
     "pwd":    command_pwd,
-    "grep":   command_grep
+    "grep":   command_grep,
+    "cd":     command_cd,
+    "ls":     command_ls
 }
