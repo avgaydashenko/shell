@@ -1,5 +1,5 @@
 import unittest
-import commands
+from command_by_name import commands_dictionary
 
 
 def get_commands(token_queue):
@@ -8,7 +8,7 @@ def get_commands(token_queue):
 
     # split all commands by pipe
     for token in token_queue:
-        if token == commands.command_by_name["|"]:
+        if token == commands_dictionary["|"]:
             command_queue.append(current_command)
             current_command = []
         else:
@@ -21,5 +21,5 @@ def get_commands(token_queue):
 class TestParser(unittest.TestCase):
 
     def test_parser(self):
-        self.token_queue = [commands.command_by_name['exit'], "now", commands.command_by_name['|'], "please"]
-        self.assertEqual(get_commands(self.token_queue), [[commands.command_by_name['exit'], "now"], ["please"]])
+        self.token_queue = [commands_dictionary['exit'], "now", commands_dictionary['|'], "please"]
+        self.assertEqual(get_commands(self.token_queue), [[commands_dictionary['exit'], "now"], ["please"]])

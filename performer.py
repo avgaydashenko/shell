@@ -1,5 +1,5 @@
 from subprocess import call
-from commands import command_pipe
+from commands.command_pipe import command_pipe
 
 
 def execute_commands(command_queue, shell_status):
