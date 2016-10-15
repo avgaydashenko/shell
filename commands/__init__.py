@@ -5,4 +5,6 @@ __all__ = ['command_assign',
            'command_grep',
            'command_pipe',
            'command_pwd',
-           'command_wc']
+           'command_wc',
+           'command_ls',
+           'command_cd']

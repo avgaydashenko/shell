@@ -10,5 +10,7 @@ commands_dictionary = {
     "cat":    command_cat.command_cat,
     "wc":     command_wc.command_wc,
     "pwd":    command_pwd.command_pwd,
-    "grep":   command_grep.command_grep
+    "grep":   command_grep.command_grep,
+    "ls":     command_ls.command_ls,
+    "cd":     command_cd.command_cd
 }
